@@ -5,6 +5,7 @@ pub mod iv_median_two_arr;
 pub mod lists;
 pub mod o_balance;
 pub mod v_palindromic;
+pub mod reversals;
 
 fn main() {
     println!("Hello, katas!");
