@@ -31,4 +31,20 @@ mod reverse_stes {
             assert_eq!(want, got, "want: {}, but got: {}", want, got)
         }
     }
+
+    #[test]
+    fn test_reverse_string_native() {
+        // Given
+        let cases = HashMap::from([
+            ("hola","aloh"),
+            ("anitalavalatina","anitalavalatina"),
+        ]);
+        
+        for (value, want) in cases.into_iter() {
+            // When
+            let got: String = value.chars().rev().collect();
+            // Then
+            assert_eq!(want, got, "want: {}, but got: {}", want, got)
+        }
+    }
 }

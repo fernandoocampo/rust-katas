@@ -1,3 +1,5 @@
+#[warn(unused_imports)]
+
 // Definition for singly-linked list.
 #[derive(PartialEq, Eq, Clone, Debug)]
 pub struct ListNode {
@@ -52,7 +54,7 @@ fn add_two_numbers(l1: Option<Box<ListNode>>, l2: Option<Box<ListNode>>) -> Opti
 
 #[cfg(test)]
 mod add_two_numbers_tests {
-    use crate::ii_add_two_numbers::add_two_numbers::{add_two_numbers, ListNode};
+    // use crate::ii_add_two_numbers::add_two_numbers::{add_two_numbers, ListNode};
 
     // #[test]
     // fn test_add_two_numbers() {

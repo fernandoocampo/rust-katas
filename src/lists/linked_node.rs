@@ -1,5 +1,4 @@
-use std::ops::Deref;
-
+#[warn(unused_imports)]
 // Definition for singly-linked list.
 // https://betterprogramming.pub/learning-rust-building-a-linked-list-102bcb08f93b
 // https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
