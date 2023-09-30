@@ -6,6 +6,7 @@ pub mod lists;
 pub mod o_balance;
 pub mod v_palindromic;
 pub mod reversals;
+pub mod counts;
 
 fn main() {
     println!("Hello, katas!");
