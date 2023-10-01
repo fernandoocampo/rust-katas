@@ -8,6 +8,7 @@ pub mod v_palindromic;
 pub mod reversals;
 pub mod counts;
 mod greetings;
+mod integers;
 
 fn main() {
     println!("Hello, katas!");
