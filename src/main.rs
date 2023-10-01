@@ -9,6 +9,7 @@ pub mod reversals;
 pub mod counts;
 mod greetings;
 mod integers;
+mod iterations;
 
 fn main() {
     println!("Hello, katas!");
