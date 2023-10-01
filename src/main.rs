@@ -7,6 +7,7 @@ pub mod o_balance;
 pub mod v_palindromic;
 pub mod reversals;
 pub mod counts;
+mod greetings;
 
 fn main() {
     println!("Hello, katas!");
