@@ -22,7 +22,7 @@ fn repeat(value: char, repeat_number: i8) -> String {
 mod sum_tests {
     use crate::iterations::for_loop;
     #[test]
-    fn test_sum_i32() {
+    fn test_to_upper_case() {
         // Given
         let input = vec!["ALPHA".to_string(), "BRAVO".to_string(), "CHARLIE".to_string(), "DELTA".to_string()];
         let want = vec!["alpha".to_string(), "bravo".to_string(), "charlie".to_string(), "delta".to_string()];
