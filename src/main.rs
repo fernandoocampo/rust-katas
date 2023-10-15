@@ -11,6 +11,7 @@ mod greetings;
 mod integers;
 mod iterations;
 mod colls;
+mod counters;
 
 fn main() {
     println!("Hello, katas!");
