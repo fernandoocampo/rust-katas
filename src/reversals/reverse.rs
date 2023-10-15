@@ -36,6 +36,19 @@ fn reverse_words_clever(str: &str) -> String {
         .join(" ")
 }
 
+fn spin_words(words: &str) -> String {
+    words.to_string()
+        .split_ascii_whitespace()
+        .map(|sub| {
+            match sub.len() >= 5 {
+                true => sub.chars().rev().collect(),
+                false => sub.to_string(),
+            }
+        })
+        .collect::<Vec<String>>()
+        .join(" ")
+}
+
 #[cfg(test)]
 mod reverse_stes {
     use std::collections::HashMap;
@@ -100,6 +113,23 @@ mod reverse_stes {
         for (input, want) in cases.into_iter() {
             // When
             let got = reverse::reverse_words_clever(input);
+            // Then
+            assert_eq!(want, got.to_string());
+        }
+    }
+
+    #[test]
+    fn test_spin_words() {
+        // Given
+        let cases = HashMap::from([
+            ("Hey fellow warriors", "Hey wollef sroirraw"),
+            ("This is a test", "This is a test"),
+            ("This is another test", "This is rehtona test"),
+        ]);
+
+        for (input, want) in cases.into_iter() {
+            // When
+            let got = reverse::spin_words(input);
             // Then
             assert_eq!(want, got.to_string());
         }
