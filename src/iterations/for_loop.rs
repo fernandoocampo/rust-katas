@@ -11,7 +11,7 @@ fn to_upper_case(values: Vec<String>) -> Vec<String> {
 fn repeat(value: char, repeat_number: i8) -> String {
     let mut result = String::new();
     
-    for i in 1..=repeat_number {
+    for _i in 1..=repeat_number {
         result.push(value);
     }
     
