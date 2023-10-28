@@ -14,6 +14,24 @@ fn reverse_string(value: &str) -> String {
     String::from_iter(chars)
 }
 
+fn print_shrek() {
+/*"⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⢀⡾⣁⣀⠀⠴⠂⠙⣗⡀⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆",
+  "⠀⠀⢀⣾⣿⣿⣿⣷⣮⣽⣾⣿⣥⣴⣿⣿⡿⢂⠔⢚⡿⢿⣿⣦⣴⣾⠁⠸⣼⡿",
+  "⠀⢀⡞⠁⠙⠻⠿⠟⠉⠀⠛⢹⣿⣿⣿⣿⣿⣌⢤⣼⣿⣾⣿⡟⠉⠀⠀⠀⠀⠀",
+  "⠀⣾⣷⣶⠇⠀⠀⣤⣄⣀⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀",
+  "⠀⠉⠈⠉⠀⠀⢦⡈⢻⣿⣿⣿⣶⣶⣶⣶⣤⣽⡹⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⠉⠲⣽⡻⢿⣿⣿⣿⣿⣿⣿⣷⣜⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣷⣶⣮⣭⣽⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+  "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉",*/
+}
+
 fn reverse_words(str: &str) -> String {
     let word_iter = str.split(" ");
     let mut result = "".to_string();
@@ -34,6 +52,18 @@ fn reverse_words_clever(str: &str) -> String {
         .map(|sub| sub.chars().rev().collect())
         .collect::<Vec<String>>()
         .join(" ")
+}
+
+fn reverse_letters(s: &str) -> String {
+    s.to_string()
+        .chars()
+        .filter(|c| c.is_alphabetic())
+        .rev()
+        .collect()
+}
+
+fn reverse_letters_two(s: &str) -> String {
+    s.rmatches(char::is_alphabetic).collect()
 }
 
 fn spin_words(words: &str) -> String {
@@ -130,6 +160,46 @@ mod reverse_stes {
         for (input, want) in cases.into_iter() {
             // When
             let got = reverse::spin_words(input);
+            // Then
+            assert_eq!(want, got.to_string());
+        }
+    }
+
+    #[test]
+    fn test_reverse_letters() {
+        // Given
+        let cases = HashMap::from([
+            ("This is an example!", "elpmaxenasisihT"),
+            ("double  spaces", "secapselbuod"),
+            ("krishan","nahsirk"),
+            ("ultr53o?n","nortlu"),
+            ("ab23c","cba"),
+            ("krish21an","nahsirk"),
+        ]);
+
+        for (input, want) in cases.into_iter() {
+            // When
+            let got = reverse::reverse_letters(input);
+            // Then
+            assert_eq!(want, got.to_string());
+        }
+    }
+
+    #[test]
+    fn test_reverse_letters_two() {
+        // Given
+        let cases = HashMap::from([
+            ("This is an example!", "elpmaxenasisihT"),
+            ("double  spaces", "secapselbuod"),
+            ("krishan","nahsirk"),
+            ("ultr53o?n","nortlu"),
+            ("ab23c","cba"),
+            ("krish21an","nahsirk"),
+        ]);
+
+        for (input, want) in cases.into_iter() {
+            // When
+            let got = reverse::reverse_letters_two(input);
             // Then
             assert_eq!(want, got.to_string());
         }
