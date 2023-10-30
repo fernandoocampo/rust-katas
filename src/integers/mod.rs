@@ -1,3 +1,4 @@
+mod count;
 mod fibbo;
 mod sum;
 mod remove;
