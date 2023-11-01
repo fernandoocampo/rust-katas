@@ -16,6 +16,12 @@ fn between_three(a: i16, b: i16) -> Vec<i16> {
     Vec::from_iter(a..=b)
 }
 
+fn fake_bin(s: &str) -> String {
+    s.chars()
+        .map(|f| if f < '5' { '0' } else { '1' } )
+        .collect()
+}
+
 #[cfg(test)]
 mod count_tests {
     use crate::integers::between;
@@ -62,6 +68,25 @@ mod count_tests {
             let got = between::between_three(test_data.0, test_data.1);
             // Then
             assert_eq!(test_data.2, got, "want: {}", test_name);
+        }
+    }
+
+    #[test]
+    fn test_fake_bin() {
+        // Given
+        let cases = std::collections::HashMap::from([
+            ("45385593107843568", ("45385593107843568", "01011110001100111")),
+            ("509321967506747", ("509321967506747", "101000111101101")),
+            ("366058562030849490134388085", ("366058562030849490134388085", "011011110000101010000011011")),
+            ("15889923", ("15889923", "01111100")),
+            ("800857237867", ("800857237867", "100111001111")),
+        ]);
+
+        for (test_name, test_data) in cases.into_iter() {
+            // When
+            let got = between::fake_bin(test_data.0);
+            // Then
+            assert_eq!(test_data.1, got, "{}", test_name);
         }
     }
 }
