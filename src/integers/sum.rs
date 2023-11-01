@@ -6,6 +6,10 @@ fn sum_i8(i: i8, j: i8) -> i8 {
     i+j
 }
 
+fn positive_sum(slice: &[i32]) -> i32 {
+    slice.iter().filter(|&&x| x > 0).sum()
+}
+
 #[cfg(test)]
 mod sum_tests {
     use crate::integers::sum;
@@ -30,5 +34,20 @@ mod sum_tests {
         let got = sum::sum_i8(i, j);
         // Then
         assert_eq!(want, got);
+    }
+
+    #[test]
+    fn test_positive_sum() {
+        // Given
+        let cases = std::collections::HashMap::from([
+            ("20_result", (&[1,-4,7,12], 20)),
+        ]);
+
+        for (test_name, test_data) in cases.into_iter() {
+            // When
+            let got = sum::positive_sum(test_data.0);
+            // Then
+            assert_eq!(test_data.1, got, "want: {}", test_name);
+        }
     }
 }
