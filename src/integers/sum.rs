@@ -10,6 +10,12 @@ fn positive_sum(slice: &[i32]) -> i32 {
     slice.iter().filter(|&&x| x > 0).sum()
 }
 
+fn square_sum(vec: Vec<i32>) -> i32 {
+    vec.iter()
+        .map(|f| f*f)
+        .sum()
+}
+
 #[cfg(test)]
 mod sum_tests {
     use crate::integers::sum;
@@ -46,6 +52,24 @@ mod sum_tests {
         for (test_name, test_data) in cases.into_iter() {
             // When
             let got = sum::positive_sum(test_data.0);
+            // Then
+            assert_eq!(test_data.1, got, "want: {}", test_name);
+        }
+    }
+
+    #[test]
+    fn test_square_sum() {
+        // Given
+        let cases = std::collections::HashMap::from([
+            ("[1, 2]", (vec![1,2], 5)),
+            ("[-1, -2]", (vec![-1, -2], 5)),
+            ("[5, 3, 4]", (vec![5, 3, 4], 50)),
+            ("[]", (vec![], 0)),
+        ]);
+
+        for (test_name, test_data) in cases.into_iter() {
+            // When
+            let got = sum::square_sum(test_data.0);
             // Then
             assert_eq!(test_data.1, got, "want: {}", test_name);
         }
