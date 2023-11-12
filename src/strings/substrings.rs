@@ -26,6 +26,22 @@ fn get_middle_smart(s: &str) -> &str {
     &s[from..to]
 }
 
+fn ends_with(word: &str, ending: &str) -> bool {
+    if word == ending {
+        return true;
+    }
+
+    if ending.len() > word.len() {
+        return false;
+    }
+
+    &word[word.len()-ending.len()..] == ending
+}
+
+fn ends_with_brief(word: &str, ending: &str) -> bool {
+    word.ends_with(ending)
+}
+
 #[cfg(test)]
 mod substring_tests {
     use crate::strings::substrings;
@@ -64,6 +80,50 @@ mod substring_tests {
             let got = substrings::get_middle_smart(input);
             // Then
             assert_eq!(want, got);
+        }
+    }
+
+    #[test]
+    fn test_ends_with() {
+        // Given
+        let cases = HashMap::from([
+            ("abc_c", ("abc", "c", true)),
+            ("empty", ("", "", true)),
+            ("space", (" ", "", true)),
+            ("banana", ("banana", "ana", true)),
+            ("a_z", ("a", "z", false)),
+            ("empty_t", ("", "t", false)),
+        ]);
+
+        for (test_name, test_data) in cases.iter() {
+            let input = test_data.0;
+            let ends = test_data.1;
+            let want = test_data.2;
+            let got = substrings::ends_with(input, ends);
+
+            assert_eq!(want, got, "test: {}", test_name);
+        }
+    }
+
+    #[test]
+    fn test_ends_with_brief() {
+        // Given
+        let cases = HashMap::from([
+            ("abc_c", ("abc", "c", true)),
+            ("empty", ("", "", true)),
+            ("space", (" ", "", true)),
+            ("banana", ("banana", "ana", true)),
+            ("a_z", ("a", "z", false)),
+            ("empty_t", ("", "t", false)),
+        ]);
+
+        for (test_name, test_data) in cases.iter() {
+            let input = test_data.0;
+            let ends = test_data.1;
+            let want = test_data.2;
+            let got = substrings::ends_with_brief(input, ends);
+
+            assert_eq!(want, got, "test: {}", test_name);
         }
     }
 }
