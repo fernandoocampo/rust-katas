@@ -42,6 +42,12 @@ fn ends_with_brief(word: &str, ending: &str) -> bool {
     word.ends_with(ending)
 }
 
+fn add_length(s: &str) -> Vec<String> {
+    s.split_whitespace()
+    .map(|x| format!("{} {}", x, x.len()))
+    .collect()
+}
+
 #[cfg(test)]
 mod substring_tests {
     use crate::strings::substrings;
@@ -125,5 +131,17 @@ mod substring_tests {
 
             assert_eq!(want, got, "test: {}", test_name);
         }
+    }
+
+    #[test]
+    fn test_add_length() {
+        do_test_add_length("apple ban",&["apple 5", "ban 3"].iter().map(|x| x.to_string()).collect::<Vec<_>>());
+        do_test_add_length("you will win",&["you 3", "will 4", "win 3"].iter().map(|x| x.to_string()).collect::<Vec<_>>());
+        do_test_add_length("y",&["y 1"].iter().map(|x| x.to_string()).collect::<Vec<_>>());
+    }
+
+    fn do_test_add_length(s: &str, want: &[String]) {
+        let got = substrings::add_length(s);
+        assert_eq!(got, want)
     }
 }
