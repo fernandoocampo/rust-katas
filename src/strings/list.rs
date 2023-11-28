@@ -19,6 +19,36 @@ fn flick_switch_smart(list: &[&str]) -> Vec<bool> {
     list.iter().map(|&s| if s != "flick" {f} else {f=!f; f}).collect()
 }
 
+fn points(games: &[&str]) -> u32 {
+    let mut result: u32 = 0;
+    for value in games.iter() {
+        let score = value.split(":")
+        .collect::<Vec<&str>>();
+        
+        if score[0] > score[1] {
+			result = result + 3;
+			continue;
+		}
+
+		if score[0] == score[1] {
+			result = result + 1;
+			continue
+		}
+    }
+    result
+}
+
+fn points_smart_one(games: &[&str]) -> u32 {
+    games.iter().map(|s| {
+        let (l,r) = s.split_once(':').unwrap();
+        match l.cmp(r) {
+            std::cmp::Ordering::Less => 0,
+            std::cmp::Ordering::Equal => 1,
+            std::cmp::Ordering::Greater => 3,
+        }
+    }).sum()
+}
+
 #[cfg(test)]
 mod string_list_tests {
     use crate::strings::list;
@@ -65,5 +95,21 @@ mod string_list_tests {
         let expected: &[bool] = expected.borrow();
         let got = list::flick_switch_smart(strings);
         assert_eq!(got, expected, "{}: want: {:?}, but got: {:?}", test_name, expected, got);
+    }
+
+    #[test]
+    fn test_points() {
+        do_test_points(&["1:0", "2:0", "3:0", "4:0", "2:1", "3:1", "4:1", "3:2", "4:2", "4:3"], 30);
+        do_test_points(&["1:1", "2:2", "3:3", "4:4", "2:2", "3:3", "4:4", "3:3", "4:4", "4:4"], 10);
+        do_test_points(&["0:1", "0:2", "0:3", "0:4", "1:2", "1:3", "1:4", "2:3", "2:4", "3:4"], 0);
+        do_test_points(&["1:0", "2:0", "3:0", "4:0", "2:1", "1:3", "1:4", "2:3", "2:4", "3:4"], 15);
+        do_test_points(&["1:0", "2:0", "3:0", "4:4", "2:2", "3:3", "1:4", "2:3", "2:4", "3:4"], 12);
+    }
+
+    fn do_test_points(games: &[&str], want: u32) {
+        let got = list::points(games);
+        assert_eq!(want, got);
+        let got = list::points_smart_one(games);
+        assert_eq!(want, got);
     }
 }
