@@ -12,6 +12,7 @@ mod integers;
 mod iterations;
 mod colls;
 mod counters;
+mod slices;
 mod strings;
 
 fn main() {
